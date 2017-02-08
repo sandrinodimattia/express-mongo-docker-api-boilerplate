@@ -1,0 +1,88 @@
+version: '2'
+services:
+  dev:
+    command: "nodemon ./src/server.js"
+    container_name: "express-api-dev"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/dev
+      - NODE_ENV=development
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    tty: true
+    links:
+      - mongo:mongo
+    volumes:
+      - "../src:/app/src"
+    networks:
+      - data
+      - front
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+
+  test:
+    command: "npm run test"
+    container_name: "express-api-test"
+    environment:
+      - CI=true
+      - NODE_ENV=test
+    depends_on:
+      - mongo-transient
+    tty: true
+    links:
+      - mongo-transient:mongo
+    volumes:
+      - "../src:/app/src"
+    networks:
+      - data
+      - front
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+
+  test-watch:
+    command: "npm run test:watch"
+    container_name: "express-api-test"
+    environment:
+      - NODE_ENV=test
+    depends_on:
+      - mongo-transient
+    tty: true
+    links:
+      - mongo-transient:mongo
+    volumes:
+      - "../src:/app/src"
+    networks:
+      - data
+      - front
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+
+  mongo:
+    image: mongo
+    container_name: "express-api-mongo"
+    command: --smallfiles
+    ports:
+      - "28017:27017"
+    volumes:
+      - ./data:/data/db
+    networks:
+      - data
+
+  mongo-transient:
+    image: mongo
+    container_name: "express-api-mongo"
+    command: --smallfiles
+    ports:
+      - "28017:27017"
+    volumes:
+      - ./data:/data/db
+    networks:
+      - data
+
+networks:
+  front:
+  data:
