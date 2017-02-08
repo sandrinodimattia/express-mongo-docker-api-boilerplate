@@ -1,6 +1,6 @@
 # Boilerplate for building APIs with Express, MongoDB and Docker
 
-This project is a boilerplate providing an Express site connected to MongoDB using [mongoose](http://mongoosejs.com/). It uses [Ava](https://github.com/avajs/ava/blob/master/readme.md) for testing and everything runs in containers using Docker Compose.
+This project is a boilerplate providing an API built with Express and connected to MongoDB using [mongoose](http://mongoosejs.com/). It uses [Ava](https://github.com/avajs/ava/blob/master/readme.md) for testing and everything runs in containers using Docker Compose.
 
 ## Usage
 
