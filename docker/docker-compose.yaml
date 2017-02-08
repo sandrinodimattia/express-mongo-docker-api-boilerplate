@@ -64,7 +64,7 @@ services:
   mongo:
     image: mongo
     container_name: "express-api-mongo"
-    command: --smallfiles
+    command: --noprealloc --smallfiles
     ports:
       - "28017:27017"
     volumes:
@@ -75,7 +75,7 @@ services:
   mongo-transient:
     image: mongo
     container_name: "express-api-mongo"
-    command: --smallfiles
+    command: --noprealloc --smallfiles
     ports:
       - "28017:27017"
     volumes:
