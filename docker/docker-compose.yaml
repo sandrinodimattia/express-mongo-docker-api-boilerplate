@@ -69,6 +69,7 @@ services:
       - "28017:27017"
     volumes:
       - ./data:/data/db
+    restart: always
     networks:
       - data
 
@@ -80,6 +81,7 @@ services:
       - "28017:27017"
     volumes:
       - ./data:/data/db
+    restart: always
     networks:
       - data
 
